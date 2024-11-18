@@ -50,20 +50,20 @@ export default function NavMain() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    for (let i = 0; i < navGroups.length; i++) {
-      for (let j = 0; j < navGroups[i].links.length; j++) {
-        if (navGroups[i].links[j].path.startsWith(pathname)) {
-          const pageName = navGroups[i].links[j].label === "Taskboard" ? "Home" : navGroups[i].links[j].label;
+    navGroups.forEach((group) => {
+      group.links.forEach((link) => {
+        if (pathname.includes(link.path) || pathname.includes(link.path + "/")) {
+          const pageName = link.label === "Taskboard" ? "Home" : link.label;
           document.title = `${pageName} | Taskify Software`;
         }
-      }
-    }
+      });
+    });
   }, [pathname]);
 
   return (
     <>
       {navGroups.map((navGroup) => (
-        <SidebarGroup>
+        <SidebarGroup key={navGroup.type}>
           <SidebarGroupLabel>{navGroup.type}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
