@@ -9,8 +9,10 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "../ui/breadcrumb";
-import { ModeToggle } from "../globals/ModelToggle";
+} from "@/components/ui/breadcrumb";
+import { ModeToggle } from "@/components/globals/ModelToggle";
+import styles from "@/styles/DashboardLayout.module.css";
+import { Bell } from "lucide-react";
 
 export default function DashboardLayout() {
   const { pathname } = useLocation();
@@ -37,9 +39,12 @@ export default function DashboardLayout() {
                 </BreadcrumbList>
               </Breadcrumb>
             </article>
-            <ModeToggle />
+            <div className="flex gap-3 items-center">
+              <Bell />
+              <ModeToggle />
+            </div>
           </header>
-          <main>
+          <main id={styles["shared-area"]}>
             <Outlet />
           </main>
         </SidebarInset>
